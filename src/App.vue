@@ -5,10 +5,10 @@
         fixed
         app
         floating
-        :mini-variant.sync="mini"
+        :mini-variant="mini"
     >
       <v-list dense>
-        <v-list-tile @click="">
+        <v-list-tile @click="mini = true" to="/home">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -16,7 +16,7 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="mini = true" to="/gandengyan">
           <v-list-tile-action>
             <v-icon>remove_red_eye</v-icon>
           </v-list-tile-action>
@@ -24,7 +24,7 @@
             <v-list-tile-title>Gan Deng Yan</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="mini = true" to="/texas-holdem">
           <v-list-tile-action>
             <v-icon>account_balance_wallet</v-icon>
           </v-list-tile-action>
@@ -36,10 +36,10 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="mini = !mini"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Rain and Sea's Home</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
