@@ -79,10 +79,11 @@
 
 <script lang="ts">
   import {Component, Emit, Model, Vue, Watch} from 'vue-property-decorator';
+  import {Player} from '@/components/gan_deng_yan/index';
 
   @Component({})
   export default class ScoreBoard extends Vue {
-    @Model('input') private players!: Array<{ name: string, inGame: boolean }>;
+    @Model('input') private players!: Array<Player>;
 
     private remains: { [player: string]: number } = {};
     private addingPlayerDialogShown: boolean = false;
@@ -93,7 +94,7 @@
 
     @Watch('players')
     public playersChanged() {
-      this.players.forEach((player: { name: string, inGame: boolean }) => {
+      this.players.forEach((player: Player) => {
         if (!this.remains[player.name]) {
           this.remains[player.name] = 0;
         }

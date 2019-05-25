@@ -5,19 +5,25 @@
       <v-flex xs2>
         <score-board v-model="players" @save="saveGame"></score-board>
       </v-flex>
+      <v-spacer></v-spacer>
+      <v-flex xs9>
+        <score-table></score-table>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
-  import ScoreBoard from '@/components/gan_deng_yan/ScoreBoard/ScoreBoard.vue';
+  import ScoreBoard from '@/components/gan_deng_yan/ScoreBoard.vue';
+  import ScoreTable from '@/components/gan_deng_yan/ScoreTable.vue';
+  import {Player} from '@/components/gan_deng_yan';
 
   @Component({
-    components: {ScoreBoard},
+    components: {ScoreBoard, ScoreTable},
   })
   export default class GanDengYan extends Vue {
-    private players: Array<{name: string, inGame: boolean}> = [];
+    private players: Array<Player> = [];
 
     protected saveGame(param: any) {
       // TODO
