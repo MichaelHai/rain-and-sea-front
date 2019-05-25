@@ -83,7 +83,7 @@
 
   @Component({})
   export default class ScoreBoard extends Vue {
-    @Model('input') private players!: Array<Player>;
+    @Model('newPlayer') private players!: Array<Player>;
 
     private remains: { [player: string]: number } = {};
     private addingPlayerDialogShown: boolean = false;
@@ -96,7 +96,7 @@
     public playersChanged() {
       this.players.forEach((player: Player) => {
         if (!this.remains[player.name]) {
-          this.remains[player.name] = 0;
+          this.$set(this.remains, player.name, 0);
         }
       });
     }
@@ -109,13 +109,15 @@
       }
     }
 
-    @Emit('input')
+    @Emit('newPlayer')
     protected addPlayer() {
       const newPlayerList = new Array(...this.players);
       if (this.addingPlayerName) {
         newPlayerList.push({
           name: this.addingPlayerName,
           inGame: true,
+          winCount: 0,
+          score: 0,
         });
       }
       this.addingPlayerName = '';
@@ -125,6 +127,7 @@
     protected save() {
       if (this.validateRemains()) {
         this.$emit('save', this.remains);
+        this.players.forEach((player: Player) => this.$set(this.remains, player.name, 0));
       }
     }
 
