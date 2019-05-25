@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <h1>Welcome to Rain And Sea's Home</h1>
-    <v-container full-height class="image-container">
-      <img src="@/assets/home.jpg" width="1000px"/>
-    </v-container>
+    <img src="@/assets/home.jpg" width="1000px" alt=""/>
   </v-container>
 </template>
 
@@ -16,7 +14,7 @@
 </script>
 
 <style scoped lang="less">
-  .image-container {
-    padding-left: 0;
+  h1 {
+    margin-bottom: 20px;
   }
 </style>

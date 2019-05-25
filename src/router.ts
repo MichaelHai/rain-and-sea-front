@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home.vue';
+import GanDengYan from '@/views/GanDengYan.vue';
 
 Vue.use(Router);
 
@@ -11,6 +12,9 @@ export default new Router({
     {
       path: '/home',
       component: Home,
+    }, {
+      path: '/gandengyan',
+      component: GanDengYan,
     },
   ],
 });
