@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-card>
-    <v-card-title primary-title>
-      <v-icon large left>style</v-icon>
+    <v-card-title>
+      <v-icon x-large left>style</v-icon>
       <span>Score Board</span>
       <v-spacer></v-spacer>
       <v-menu
@@ -37,11 +37,11 @@
         </v-card>
       </v-menu>
     </v-card-title>
-    <v-list>
+    <v-list subheader>
       <template v-for="player in players">
         <v-list-tile class="list-item">
           <v-list-tile-avatar>
-            <v-icon x-large>person</v-icon>
+            <v-icon large>person</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -198,7 +198,7 @@
 
 <style scoped lang="less">
   .list-item {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
   }
 
   .player-name-input {
@@ -210,6 +210,6 @@
   }
 
   .bangInput {
-    padding: 8px 16px 0 16px;
+    padding: 0 16px 0 16px;
   }
 </style>

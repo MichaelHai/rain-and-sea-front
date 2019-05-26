@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-container>
+  <div>
     <h1>GanDengYan</h1>
     <v-layout>
       <v-flex xs2>
@@ -24,7 +24,7 @@
         </v-expansion-panel>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
@@ -78,7 +78,7 @@
 
 <style scoped lang="less">
   h1 {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   .dashboard {
