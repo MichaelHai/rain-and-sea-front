@@ -41,13 +41,15 @@
     private players: Array<Player> = [];
     private scores: Array<{ [player: string]: number }> = [];
 
-    protected saveGame(remains: {[player: string]: number}) {
+    protected saveGame(result: {remains: {[player: string]: number}, bang: number}) {
+      const multipler = Math.pow(2, result.bang);
       let winningScore: number = 0;
       let winner: Player | null = null;
       const score: {[player: string]: number} = {};
       this.players.forEach((player: Player) => {
-        const remainForPlayer = remains[player.name];
-        const scoreForPlayer = remainForPlayer === 5 ? -10 : -remainForPlayer;
+        const remainForPlayer = result.remains[player.name];
+        let scoreForPlayer = remainForPlayer === 5 ? -10 : -remainForPlayer;
+        scoreForPlayer *= multipler;
         if (scoreForPlayer === 0) {
           winner = player;
         } else {

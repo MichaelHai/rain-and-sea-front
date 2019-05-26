@@ -63,6 +63,14 @@
           </v-list-tile-action>
         </v-list-tile>
       </template>
+      <v-text-field
+          v-model="bang"
+          label="Bang!"
+          type="number"
+          class="bangInput"
+          :rules="bangValidators"
+      >
+      </v-text-field>
     </v-list>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -86,6 +94,7 @@
     @Model('newPlayer') private players!: Array<Player>;
 
     private remains: { [player: string]: number } = {};
+    private bang: number = 0;
     private addingPlayerDialogShown: boolean = false;
     private addingPlayerName: string = '';
 
@@ -125,10 +134,27 @@
     }
 
     protected save() {
-      if (this.validateRemains()) {
-        this.$emit('save', this.remains);
+      if (this.validateRemains() && this.validateBang()) {
+        this.$emit('save', {remains: this.remains, bang: this.bang});
         this.players.forEach((player: Player) => this.$set(this.remains, player.name, 0));
+        this.bang = 0;
       }
+    }
+
+    protected get bangValidators(): Array<() => boolean | string> {
+      return [
+        () => {
+          if (this.validateBang()) {
+            return true;
+          } else {
+            return 'Bang should be positive!';
+          }
+        },
+      ];
+    }
+
+    private validateBang(): boolean  {
+      return this.bang >= 0;
     }
 
     private validateRemains(): boolean {
@@ -178,5 +204,9 @@
 
   .adding-player-card {
     padding-top: 8px;
+  }
+
+  .bangInput {
+    padding: 8px 16px 0 16px;
   }
 </style>

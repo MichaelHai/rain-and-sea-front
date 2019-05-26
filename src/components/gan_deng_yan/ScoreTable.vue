@@ -5,7 +5,7 @@
   >
     <template v-slot:headers="props">
       <tr>
-        <th>#</th>
+        <th class="text-md-center">#</th>
         <th v-for="player in players" class="text-md-center" colspan="2">
           {{ player.name }}
         </th>
