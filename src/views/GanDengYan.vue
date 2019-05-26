@@ -44,7 +44,8 @@
     private continusWinningCount: number = 0;
 
     protected saveGame(result: {remains: {[player: string]: number}, bang: number}) {
-      const winner: Player = this.players.find((player: Player) => result.remains[player.name] === 0) as Player;
+      const winner: Player = this.players
+        .find((player: Player) => player.inGame && result.remains[player.name] === 0) as Player;
       if (winner === this.lastWinner) {
         this.continusWinningCount++;
       } else {
@@ -56,13 +57,15 @@
       const score: {[player: string]: number} = {};
       let winningScore: number = 0;
       this.players.forEach((player: Player) => {
-        const remainForPlayer = result.remains[player.name];
-        let scoreForPlayer = remainForPlayer === 5 ? -10 : -remainForPlayer;
-        scoreForPlayer *= multipler;
-        if (scoreForPlayer !== 0) {
-          winningScore -= scoreForPlayer;
-          player.score += scoreForPlayer;
-          score[player.name] = scoreForPlayer;
+        if (player.inGame) {
+          const remainForPlayer = result.remains[player.name];
+          let scoreForPlayer = remainForPlayer === 5 ? -10 : -remainForPlayer;
+          scoreForPlayer *= multipler;
+          if (scoreForPlayer !== 0) {
+            winningScore -= scoreForPlayer;
+            player.score += scoreForPlayer;
+            score[player.name] = scoreForPlayer;
+          }
         }
       });
       winner!.score += winningScore;
