@@ -4,3 +4,7 @@ export interface Player {
   winCount: number;
   score: number;
 }
+
+export enum Order {
+  DESC, ASEC,
+}

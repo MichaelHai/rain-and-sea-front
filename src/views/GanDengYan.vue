@@ -32,7 +32,7 @@
   import ScoreBoard from '@/components/gan_deng_yan/ScoreBoard.vue';
   import ScoreTable from '@/components/gan_deng_yan/ScoreTable.vue';
   import {Player} from '@/components/gan_deng_yan';
-  import Dashboard from '@/components/gan_deng_yan/Dashboard.vue';
+  import Dashboard from '@/components/gan_deng_yan/dashboard/Dashboard.vue';
 
   @Component({
     components: {ScoreBoard, ScoreTable, Dashboard},
