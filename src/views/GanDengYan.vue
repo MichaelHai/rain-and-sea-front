@@ -40,19 +40,26 @@
   export default class GanDengYan extends Vue {
     private players: Array<Player> = [];
     private scores: Array<{ [player: string]: number }> = [];
+    private lastWinner: Player | null = null;
+    private continusWinningCount: number = 0;
 
     protected saveGame(result: {remains: {[player: string]: number}, bang: number}) {
-      const multipler = Math.pow(2, result.bang);
-      let winningScore: number = 0;
-      let winner: Player | null = null;
+      const winner: Player = this.players.find((player: Player) => result.remains[player.name] === 0) as Player;
+      if (winner === this.lastWinner) {
+        this.continusWinningCount++;
+      } else {
+        this.lastWinner = winner;
+        this.continusWinningCount = 0;
+      }
+      const multipler = Math.pow(2, result.bang + this.continusWinningCount);
+
       const score: {[player: string]: number} = {};
+      let winningScore: number = 0;
       this.players.forEach((player: Player) => {
         const remainForPlayer = result.remains[player.name];
         let scoreForPlayer = remainForPlayer === 5 ? -10 : -remainForPlayer;
         scoreForPlayer *= multipler;
-        if (scoreForPlayer === 0) {
-          winner = player;
-        } else {
+        if (scoreForPlayer !== 0) {
           winningScore -= scoreForPlayer;
           player.score += scoreForPlayer;
           score[player.name] = scoreForPlayer;

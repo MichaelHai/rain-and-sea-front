@@ -135,7 +135,7 @@
 
     protected save() {
       if (this.validateRemains() && this.validateBang()) {
-        this.$emit('save', {remains: this.remains, bang: this.bang});
+        this.$emit('save', {remains: this.remains, bang: Number.parseInt(this.bang as unknown as string, 10)});
         this.players.forEach((player: Player) => this.$set(this.remains, player.name, 0));
         this.bang = 0;
       }
