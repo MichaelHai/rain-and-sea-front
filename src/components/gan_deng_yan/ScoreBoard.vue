@@ -63,6 +63,8 @@
           </v-list-tile-action>
         </v-list-tile>
       </template>
+    </v-list>
+    <v-card-actions>
       <v-text-field
           v-model="bang"
           label="Bang!"
@@ -71,9 +73,6 @@
           :rules="bangValidators"
       >
       </v-text-field>
-    </v-list>
-    <v-card-actions>
-      <v-spacer></v-spacer>
       <v-btn @click="save">Save</v-btn>
     </v-card-actions>
     <v-snackbar
@@ -135,7 +134,11 @@
 
     protected save() {
       if (this.validateRemains() && this.validateBang()) {
-        this.$emit('save', {remains: this.remains, bang: Number.parseInt(this.bang as unknown as string, 10)});
+        let bang = Number.parseInt(this.bang as unknown as string, 10);
+        if (Number.isNaN(bang)) {
+          bang = 0;
+        }
+        this.$emit('save', {remains: this.remains, bang});
         this.players.forEach((player: Player) => this.$set(this.remains, player.name, 0));
         this.bang = 0;
       }
